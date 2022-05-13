@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table("ingredient")
  * @ORM\Entity(repositoryClass= IngredientRepository::class)
- * UniqueEntity("name")
+ * @UniqueEntity("name")
  */
 class Ingredient
 {
@@ -42,7 +42,7 @@ class Ingredient
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * Assert\NotNull
+     * @Assert\NotNull
      */
     private ?DateTimeImmutable $createdAt;
 

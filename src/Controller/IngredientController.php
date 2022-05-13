@@ -141,5 +141,9 @@ class IngredientController extends AbstractController
             'Votre ingrédient a été supprimé avec succès!');
 
         //return $this->redirectToRoute('ingredient.index');
+
+        //return $this->render('pages/ingredient/new.html.twig', [
+          //  'form' => $form->createView(),
+        //]);
     }
 }
