@@ -94,4 +94,11 @@ class Ingredient
 
         return $this;
     }
+
+    //Nécessaire pour que dans RecipeTYpe ->add('ingredients'), RecipeType reconnaisse que ingredients est un string
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

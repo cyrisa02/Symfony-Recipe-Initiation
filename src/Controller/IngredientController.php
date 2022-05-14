@@ -19,7 +19,7 @@ class IngredientController extends AbstractController
      */
 
     /**
-     * @Route("/ingredient", name="app_ingredient", methods={"GET"})
+     * @Route("/ingredient", name="ingredient.index", methods={"GET"})
      */
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -40,7 +40,7 @@ class IngredientController extends AbstractController
      */
 
     /**
-     * @Route("/ingredient/nouveau", "ingredient.new", methods={"GET","POST"})
+     * @Route("/ingredient/nouveau", name="ingredient.new", methods={"GET","POST"})
      */
     public function new(Request $request,
     EntityManagerInterface $manager): Response
@@ -78,7 +78,7 @@ class IngredientController extends AbstractController
                 'success',
                 'Votre ingrédient a été créé avec succès!');
 
-            //return $this->redirectToRoute('ingredient.index');
+            return $this->redirectToRoute('ingredient.index');
         }
 
         return $this->render('pages/ingredient/new.html.twig', [
@@ -91,7 +91,7 @@ class IngredientController extends AbstractController
      */
 
     /**
-     * @Route("/ingredient/edition/{id}", "ingredient.edit", methods={"GET","POST"})
+     * @Route("/ingredient/edition/{id}", name="ingredient.edit", methods={"GET","POST"})
      */
     public function edit(IngredientRepository $repository, Ingredient $ingredient,
      int $id,
@@ -110,7 +110,7 @@ class IngredientController extends AbstractController
                 'success',
                 'Votre ingrédient a été modifié avec succès!');
 
-            //return $this->redirectToRoute('ingredient.index');
+            return $this->redirectToRoute('ingredient.index');
         }
 
         return $this->render('pages/ingredient/edit.html.twig', [
@@ -119,7 +119,7 @@ class IngredientController extends AbstractController
     }
 
     /**
-     * @Route("/ingredient/suppression/{id}", "ingredient.delete", methods={"GET"})
+     * @Route("/ingredient/suppression/{id}", name="ingredient.delete", methods={"GET"})
      */
     public function delete(
         EntityManagerInterface $manager,
@@ -140,7 +140,7 @@ class IngredientController extends AbstractController
             'success',
             'Votre ingrédient a été supprimé avec succès!');
 
-        //return $this->redirectToRoute('ingredient.index');
+        return $this->redirectToRoute('ingredient.index');
 
         //return $this->render('pages/ingredient/new.html.twig', [
           //  'form' => $form->createView(),

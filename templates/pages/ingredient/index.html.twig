@@ -8,16 +8,16 @@
 		{% if not ingredients.items is same as ([]) %}
 
 			<h1>Mes ingrédients</h1>
-			{# <a href= "{{ path ("ingredient.new")}}" class= "btn btn-primary">
+			 <a href= "{{ path ("ingredient.new")}}" class= "btn btn-primary">
 			Créer un ingrédient
-			</a> #}
+			</a> 
 
 			{% for message in app.flashes('success')%}
 				<div class="alert alert-success mt-4">
 					{{message}}
 				</div>
 			{% endfor %}
-			<h1>ATTENTION BINE ENLEVER LES 34!!!!</h1>
+			<h1>ATTENTION BIEN ENLEVER LES 34!!!! Mettre une confirmation en JS pour la suppression</h1>
 
 			<div class="count mt-4">
 				<h4>Nombre total d'ingrédients:
@@ -44,10 +44,10 @@
 							<td>{{ingredient.price}}</td>
 							<td>{{ingredient.createdAt | date('d/m/Y')}}</td>
 							<td>
-								<a href="#" class="btn btn-info">Editer à revoir 1h10</a>
+								<a href="{{ path('ingredient.edit', { id: ingredient.id}) }}" class="btn btn-info">Modifier</a>
 							</td>
 							<td>
-								<a href="#" class="btn btn-warning">Supprimer à revoir 1h10</a>
+								<a href="{{ path('ingredient.delete', { id: ingredient.id}) }}" class="btn btn-warning">Supprimer</a>
 							</td>
 
 						</tr>
@@ -61,7 +61,7 @@
 
 			{%else%}
 
-			<h4>Il n'y apas d'ingrédients</h4>
+			<h4>Il n'y a pas d'ingrédients</h4>
 
 		{% endif %}
 
