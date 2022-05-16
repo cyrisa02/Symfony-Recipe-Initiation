@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Entity
@@ -25,8 +24,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?int $id;
 
-   
-    
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
@@ -60,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
-    private string $password;
+    private string $password = 'password';
 
     /**
      * @ORM\Column(type="datetime_immutable")
