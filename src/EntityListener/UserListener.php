@@ -25,7 +25,7 @@ class UserListener
     }
 
     /**
-     * ENcode password based on plain password.
+     * Encode password based on plain password.
      *
      * @return void
      */
@@ -40,7 +40,7 @@ class UserListener
                 $user,
                 $user->getPlainPassword()
             )
-            );
+        );
 
         $user->setPlainPassword(null);
     }

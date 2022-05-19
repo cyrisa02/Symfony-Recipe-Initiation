@@ -7,6 +7,8 @@ use App\Form\IngredientType;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +22,12 @@ class IngredientController extends AbstractController
 
     /**
      * @Route("/ingredient", name="ingredient.index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $ingredients = $paginator->paginate(
-            $repository->findAll(), /* query NOT result */
+            $repository->findBy(['user' => $this->getUser()]), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
@@ -41,6 +44,7 @@ class IngredientController extends AbstractController
 
     /**
      * @Route("/ingredient/nouveau", name="ingredient.new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request,
     EntityManagerInterface $manager): Response
@@ -71,6 +75,8 @@ class IngredientController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredient = $form->getData();
+            $ingredient->setUser($this->getUser());
+
             $manager->persist($ingredient);
             $manager->flush();
 
@@ -92,6 +98,7 @@ class IngredientController extends AbstractController
 
     /**
      * @Route("/ingredient/edition/{id}", name="ingredient.edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER') and user === ingredient.getUser()")
      */
     public function edit(IngredientRepository $repository, Ingredient $ingredient,
      int $id,
